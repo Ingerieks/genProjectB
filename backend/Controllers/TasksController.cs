@@ -11,5 +11,15 @@ namespace backend.Controllers
         {
             return Ok(new[] { "Task 1", " Task 2"});
         }
+
+        [HttpPost]
+        public IActionResult CreateUser([FromBody] User user)
+        {
+            Console.WriteLine(user);
+            Console.WriteLine(user.Password);
+
+            return Ok();
+        }
     }
 }
+
