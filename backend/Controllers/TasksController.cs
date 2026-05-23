@@ -15,7 +15,7 @@ namespace backend.Controllers
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
         {
-            Console.WriteLine(user);
+            Console.WriteLine(user.Username);
             Console.WriteLine(user.Password);
 
             return Ok();

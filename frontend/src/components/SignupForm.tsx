@@ -1,24 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
-type FormProps = {
-  heading: string;
-};
-
-function Form({ heading }: FormProps) {
+function Form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const mutation = useMutation({
     mutationFn: async (credentials: { username: string; password: string }) => {
-      console.log("here 1");
-      const result = await fetch("http://localhost:5200/api/tasks", {
+      const result = await fetch("http://localhost:5193/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
       });
+      console.log("result", result.json);
       return result.json();
     },
   });
@@ -36,16 +32,21 @@ function Form({ heading }: FormProps) {
         handleSubmit();
       }}
     >
-      <h1>{heading}</h1>
-      <label>
-        Username
-        <input type="text" onChange={(e) => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-      </label>
-      <button type="submit">Submit</button>
+      <div>
+        <h1>Sign up</h1>
+        <label>
+          Username
+          <input type="text" onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   );
 }

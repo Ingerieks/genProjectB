@@ -1,10 +1,10 @@
-import Form from "../components/Form";
+import Form from "../components/SignupForm";
 
 function Signup() {
   return (
     <div>
       <div>
-        <Form heading={"Sign up"} />
+        <Form />
       </div>
     </div>
   );
