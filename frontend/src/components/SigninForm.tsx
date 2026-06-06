@@ -8,7 +8,7 @@ function SignInForm() {
 
   const mutation = useMutation({
     mutationFn: async (credentials: { username: string; password: string }) => {
-      const result = await fetch("http://localhost:5193/api/users", {
+      const result = await fetch("http://localhost:5193/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -16,7 +16,6 @@ function SignInForm() {
         body: JSON.stringify(credentials),
       });
       if (!result.ok) {
-        console.log("here1");
         setError("unauthorized");
       }
       return result.json();
@@ -29,7 +28,7 @@ function SignInForm() {
       password,
     });
   }
-  console.log("error", error);
+
   return (
     <form
       onSubmit={(e) => {
