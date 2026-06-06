@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend.Controllers
 {
@@ -7,7 +8,7 @@ namespace backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
-
+        private readonly PasswordHasher<User> _passwordHasher = new();
         public UsersController(AppDbContext context)
         {
             _context = context;
@@ -24,7 +25,8 @@ namespace backend.Controllers
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] User loginUser)
-        {
+        {  
+            Console.WriteLine("loginUser", loginUser);
             var user = _context.Users.FirstOrDefault(u =>
                 u.Username == loginUser.Username &&
                 u.Password == loginUser.Password);
@@ -33,9 +35,8 @@ namespace backend.Controllers
             {
                 return Unauthorized();
             }
-
-            return Ok(user);
+            return Ok(new { username = user.Username });
             }
-
+       
     }
 }
