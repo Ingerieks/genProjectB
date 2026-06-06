@@ -6,7 +6,7 @@ services:
     ports:
       - "5193:8080"
     environment:
-      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=genProjectDb;Username=genProject;Password=G5t!xkXo17yyhV
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=genProjectDb;Username=genProject;Password=${DB_PASSWORD}
     depends_on:
       - db
 
@@ -21,9 +21,9 @@ services:
     environment:
       POSTGRES_DB: genProjectDb
       POSTGRES_USER: genProject
-      POSTGRES_PASSWORD: G5t!xkXo17yyhV
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
